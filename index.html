@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<head>
+
+  <!-- Page Title -->
+  <title>Rosary Daily Prayer</title>
+
+  <!-- Normal Description (SEO) -->
+  <meta name="description" content="Complete your daily rosary step by step with mysteries and a beautiful completion celebration." />
+
+  <!-- Open Graph Preview (WhatsApp, Facebook, Telegram) -->
+  <meta property="og:title" content="Rosary Daily Prayer 🙏" />
+  <meta property="og:description" content="An interactive daily rosary popup guide with mysteries and prayer completion animation." />
+
+  <!-- ✅ Your Preview Image -->
+  <meta property="og:image" content="https://ap095665-boop.github.io/rosarydaily/mother-of-perpetual-help-1060612_640.jpg" />
+
+  <!-- Website URL -->
+  <meta property="og:url" content="https://ap095665-boop.github.io/rosarydaily/" />
+
+  <!-- Type -->
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Preview -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rosary Daily Prayer 🙏" />
+  <meta name="twitter:description" content="Step-by-step rosary prayer with mysteries and daily completion reward." />
+
+  <!-- Same Image for Twitter -->
+  <meta name="twitter:image" content="https://ap095665-boop.github.io/rosarydaily/mother-of-perpetual-help-1060612_640.jpg" />
+
+</head>
+  
+
+
+<style>
+  /* ✅ Full screen base with AUTO SCROLL */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+    overflow-y: auto; 
+    -webkit-overflow-scrolling: touch;
+
+    font-family: Arial, sans-serif;
+  }
+
+  /* ✅ Animated Gradient Background */
+  body {
+    background: linear-gradient(120deg, #000, #222, #5500ff, #000);
+    background-size: 300% 300%;
+    animation: bgMove 6s infinite alternate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  @keyframes bgMove {
+    0% { background-position: left; }
+    100% { background-position: right; }
+  }
+
+  /* ✅ Floating Glow Particles */
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: float 6s infinite ease-in-out;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-120px); }
+  }
+
+  /* ✅ Main Card (Scroll if Needed) */
+  .card {
+    width: 85%;
+    max-width: 380px;
+    padding: 30px;
+    text-align: center;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 0 30px rgba(255,255,255,0.2);
+
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 18px;
+    opacity: 0.9;
+  }
+
+  /* ✅ Glowing Photo Frame */
+  .frame {
+    margin: 25px auto;
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    border: 6px solid;
+    box-shadow: 0 0 25px;
+    animation: glowPulse 1.5s infinite alternate;
+    background: url("https://ap095665-boop.github.io/rosarydaily/mother-of-perpetual-help-1060612_640.jpg") center/cover;
+  }
+
+  @keyframes glowPulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
+  }
+
+  /* ✅ Start Button */
+  #startBtn {
+    display: none;
+    margin-top: 20px;
+    padding: 14px 35px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: lime;
+    color: black;
+    font-weight: bold;
+    box-shadow: 0 0 15px lime;
+  }
+
+  #startBtn:hover {
+    transform: scale(1.05);
+  }
+
+  /* ✅ Loading Redirect Text */
+  #redirectMsg {
+    margin-top: 15px;
+    color: lime;
+    font-weight: bold;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ✅ Particles -->
+<div id="particles"></div>
+
+<!-- ✅ Landing Card -->
+<div class="card">
+  <h1>📿 Daily Rosary</h1>
+  <p>Preparing today’s mysteries...</p>
+
+  <!-- Glowing Frame -->
+  <div class="frame" id="glowFrame"></div>
+
+  <p id="redirectMsg">Please wait...</p>
+
+  <!-- ✅ Start Button -->
+  <button id="startBtn">Start</button>
+</div>
+
+<script>
+/* ✅ Random Glow Color Frame */
+const colors = ["red", "cyan", "lime", "orange", "violet", "yellow", "deeppink"];
+const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+const frame = document.getElementById("glowFrame");
+frame.style.borderColor = randomColor;
+frame.style.boxShadow = "0 0 30px " + randomColor;
+
+/* ✅ Particle Generator */
+const particleBox = document.getElementById("particles");
+
+for(let i=0; i<15; i++){
+  let p = document.createElement("div");
+  p.className = "particle";
+  p.style.width = p.style.height = (Math.random()*15+8)+"px";
+  p.style.left = Math.random()*100+"vw";
+  p.style.top = Math.random()*100+"vh";
+  p.style.background = colors[Math.floor(Math.random()*colors.length)];
+  p.style.animationDuration = (Math.random()*5+3)+"s";
+  particleBox.appendChild(p);
+}
+
+/* ✅ Weekday Redirect Logic */
+const day = new Date().getDay();
+
+/* ✅ Replace these links with your real rosary pages */
+const urls = {
+  0: "https://ap095665-boop.github.io/Happy",
+  1: "https://ap095665-boop.github.io/Rosary",
+  2: "https://ap095665-boop.github.io/sad",
+  3: "https://ap095665-boop.github.io/Happy",
+  4: "https://ap095665-boop.github.io/light",
+  5: "https://ap095665-boop.github.io/sad",
+  6: "https://ap095665-boop.github.io/Rosary"
+};
+
+/* ✅ Show Start Button AFTER 3 Seconds */
+setTimeout(() => {
+  document.getElementById("redirectMsg").innerText =
+    "Ready! Click Start to begin today’s rosary 🙏";
+
+  document.getElementById("startBtn").style.display = "inline-block";
+}, 3000);
+
+/* ✅ Redirect Only When User Clicks */
+document.getElementById("startBtn").addEventListener("click", () => {
+  window.location.href = urls[day];
+});
+</script>
+
+</body>
+</html>
