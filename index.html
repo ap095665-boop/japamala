@@ -165,6 +165,14 @@
   <div class="frame" id="glowFrame"></div>
 
   <p id="redirectMsg">Please wait...</p>
+  <p id="mysteryName" style="
+  margin-top: 15px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+  opacity: 0.9;
+">
+</p>
 
   <!-- ✅ Start Button -->
   <button id="startBtn">Start</button>
@@ -207,6 +215,19 @@ const urls = {
   6: "https://ap095665-boop.github.io/Rosary"
 };
 
+/* ✅ Mystery Name by Day */
+const mysteryNames = {
+  0: "🌸 Glorious Mysteries",
+  1: "🌼 Joyful Mysteries",
+  2: "🌺 Sorrowful Mysteries",
+  3: "🌸 Glorious Mysteries",
+  4: "💡 Luminous Mysteries",
+  5: "🌺 Sorrowful Mysteries",
+  6: "🌼 Joyful Mysteries"
+};
+
+document.getElementById("mysteryName").innerText =
+  "Today’s Mystery: " + mysteryNames[day];
 /* ✅ Show Start Button AFTER 3 Seconds */
 setTimeout(() => {
   document.getElementById("redirectMsg").innerText =
