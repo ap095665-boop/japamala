@@ -59,18 +59,17 @@ html, body {
   padding: 15px;
   background: white;
   border-top: 1px solid #ddd;
-display: flex;
-  justify-content: center;
 
   z-index: 9999;
   }
 
   button {
-  
-  width: 100%;          /* ✅ Responsive */
+  position: relative;
+
+  width: 90%;          /* ✅ Responsive */
   max-width: 400px;    /* ✅ Limit on landscape/tablet */
 
-  padding: 16px 45px;
+  padding: 18px;
   font-size: 20px;
 
   border: none;
@@ -78,9 +77,13 @@ display: flex;
   background: black;
   color: white;
   cursor: pointer;
+    /* ✅ FORCE PERFECT CENTER ALWAYS */
+  left: 50%;
+  transform: translateX(-50%);
+
 }
   
-  }
+  
 
   /* ✅ Final Check Animation */
   .checkmark {
