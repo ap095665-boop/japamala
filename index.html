@@ -32,7 +32,14 @@
 
   <!-- Same Image for Twitter -->
   <meta name="twitter:image" content="https://ap095665-boop.github.io/japamala/mother-of-perpetual-help-1060612_640.jpg" />
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
 
+<!-- Theme Color -->
+<meta name="theme-color" content="#d4af37">
+
+<!-- App Icon -->
+<link rel="apple-touch-icon" href="android-chrome-192x192.png">
 </head>
   
 
@@ -240,6 +247,12 @@ setTimeout(() => {
 document.getElementById("startBtn").addEventListener("click", () => {
   window.location.href = urls[day];
 });
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(() => console.log("Service Worker Registered ✅"))
+      .catch((error) => console.log("SW Error ❌", error));
+  }
 </script>
 
 </body>
