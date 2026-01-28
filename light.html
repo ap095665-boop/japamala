@@ -564,7 +564,7 @@ function addPointsOnVisit() {
     return { added:false, total:getPoints() };
   }
 
-  let updated = getPoints() + 5;
+  let updated = getPoints() + 2;
   localStorage.setItem("totalPoints", updated);
   localStorage.setItem("lastPointsVisit", today);
 
@@ -592,7 +592,7 @@ function showPointsPopup(){
 
   document.getElementById("todayMsg").innerText =
     result.added
-      ? "✅ You received +5 points today!"
+      ? "✅ You received +2 points today!"
       : "⚠️ Points already collected today.";
 
   animatePoints(result.total);
