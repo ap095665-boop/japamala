@@ -64,6 +64,9 @@ html, body {
   }
 
   button {
+    max-width: 400px;   /* ✅ Prevent too wide */
+  margin: 0 auto;     /* ✅ Always center */
+  display: block;     /* ✅ Required for margin auto */
     padding: 16px 45px;
     font-size: 20px;
     border: none;
@@ -72,7 +75,7 @@ html, body {
     color: white;
     cursor: pointer;
     width: 90%;
-    max-width: 350px;
+  
   }
 
   /* ✅ Final Check Animation */
