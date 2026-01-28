@@ -59,22 +59,25 @@ html, body {
   padding: 15px;
   background: white;
   border-top: 1px solid #ddd;
-
+display: flex;
+  justify-content: center; /* ✅ Always center */
   z-index: 9999;
   }
 
   button {
-    max-width: 400px;   /* ✅ Prevent too wide */
-  margin: 0 auto;     /* ✅ Always center */
-  display: block;     /* ✅ Required for margin auto */
-    padding: 16px 45px;
-    font-size: 20px;
-    border: none;
-    border-radius: 14px;
-    background: black;
-    color: white;
-    cursor: pointer;
-    width: 100%;
+    button {
+  width: 90%;          /* ✅ Responsive */
+  max-width: 400px;    /* ✅ Limit on landscape/tablet */
+
+  padding: 16px 45px;
+  font-size: 20px;
+
+  border: none;
+  border-radius: 14px;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
   
   }
 
