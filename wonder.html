@@ -21,8 +21,6 @@ padding-bottom: 130px;
   #app {
     width: 100vw;
     height: 100vh;
-    padding-top: calc(env(safe-area-inset-top) + 25px);
-
     display: flex;
     flex-direction: column;
     background: white;
@@ -38,19 +36,11 @@ padding-bottom: 130px;
 
   /* ✅ Fixed Bottom Button */
   #buttonBar {
-    position: fixed;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  background: black;
-  color: white;
-  padding: 18px;
-  border-radius: 25px;
-  font-size: 22px;
-  text-align: center;
-  z-index: 999;
-    text-align:center;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    background: white;
+    text-align: center;
+    position: sticky;
   }
 
   button {
