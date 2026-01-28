@@ -11,31 +11,12 @@
   body {
     margin: 0;
     
-  padding-top: 110px;
-  padding-bottom: 130px;
-}
+  padding:0;
+
     font-family: Arial, sans-serif;
     background: white;
   }
 
-.top-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-
-  padding: 20px;
-  padding-top: calc(env(safe-area-inset-top) + 15px);
-
-  background: white;
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-
-  z-index: 1000;
-  border-bottom: 1px solid #ddd;
-}
-  
   /* ✅ Main App Layout */
   #app {
     width: 100vw;
@@ -59,7 +40,6 @@
     border-top: 1px solid #ddd;
     background: white;
     text-align: center;
-    position: sticky;
   }
 
   button {
@@ -190,9 +170,7 @@
 </head>
 
 <body>
-<div class="top-header">
-  Rosary Daily Prayer
-</div>
+
 <!-- ✅ APP -->
 <div id="app">
   <div id="content"></div>
