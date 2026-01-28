@@ -51,23 +51,27 @@ html, body {
 
   /* ✅ Fixed Bottom Button */
   #buttonBar {
-    position: fixed;
+  position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
 
-  padding: 15px;
+  width: 100%;
   background: white;
   border-top: 1px solid #ddd;
 
+  padding: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
   z-index: 9999;
-  }
+}
 
-  button {
-  position: relative;
-
-  width: 90%;          /* ✅ Responsive */
-  max-width: 400px;    /* ✅ Limit on landscape/tablet */
+  #nextBtn {
+  width: 90%;
+  max-width: 400px;
 
   padding: 18px;
   font-size: 20px;
@@ -76,10 +80,10 @@ html, body {
   border-radius: 14px;
   background: black;
   color: white;
-  cursor: pointer;
-    /* ✅ FORCE PERFECT CENTER ALWAYS */
-  
 
+  cursor: pointer;
+
+  box-sizing: border-box;
 }
   
   
