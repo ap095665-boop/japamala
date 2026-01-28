@@ -16,6 +16,13 @@
     font-family: Arial, sans-serif;
     background: white;
   }
+/* ✅ FIX: FULL FRAME LOCK FOR PWA (NO OUTSIDE SCROLL) */
+html, body {
+  height: 100%;
+  overflow: hidden; /* ✅ Stop full-page scrolling */
+}
+
+/* ✅ Keep App Fixed Like Native Screen */
 
   /* ✅ Main App Layout */
   #app {
@@ -24,7 +31,11 @@
     display: flex;
     flex-direction: column;
     background: white;
-  }
+    position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+  
 
   /* ✅ Scrollable Content Area */
   #content {
