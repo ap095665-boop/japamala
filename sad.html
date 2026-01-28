@@ -566,7 +566,7 @@ function addPointsOnVisit() {
     return { added:false, total:getPoints() };
   }
 
-  let updated = getPoints() + 5;
+  let updated = getPoints() + 2;
   localStorage.setItem("totalPoints", updated);
   localStorage.setItem("lastPointsVisit", today);
 
@@ -594,7 +594,7 @@ function showPointsPopup(){
 
   document.getElementById("todayMsg").innerText =
     result.added
-      ? "✅ You received +5 points today!"
+      ? "✅ You received +2 points today!"
       : "⚠️ Points already collected today.";
 
   animatePoints(result.total);
@@ -660,12 +660,7 @@ function showPointsPopup(){
       You've completed today's rosary successfully.
     </p>
 
-    <div class="checkmark">✔</div>
-
-    <p style="color:green;font-weight:bold;text-align:center;">
-      Redirecting to Points Page in 3 seconds...
-    </p>
-  `;
+    <div class="checkmark">✔</div>`;
 
   nextBtn.style.display = "none";
 
