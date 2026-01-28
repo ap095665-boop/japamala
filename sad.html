@@ -10,10 +10,19 @@
 <style>
   body {
     margin: 0;
-    padding: 0;
+    
+  padding:0;
+
     font-family: Arial, sans-serif;
     background: white;
   }
+/* ✅ FIX: FULL FRAME LOCK FOR PWA (NO OUTSIDE SCROLL) */
+html, body {
+  height: 100%;
+  overflow: hidden; /* ✅ Stop full-page scrolling */
+}
+
+/* ✅ Keep App Fixed Like Native Screen */
 
   /* ✅ Main App Layout */
   #app {
@@ -22,35 +31,61 @@
     display: flex;
     flex-direction: column;
     background: white;
-  }
+    position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+  
 
   /* ✅ Scrollable Content Area */
   #content {
     flex: 1;
     overflow-y: auto;
     padding: 20px;
+   
     box-sizing: border-box;
+     padding-bottom: 220px; /* ✅ allows scroll till full end */
+  -webkit-overflow-scrolling: touch;
+
   }
 
   /* ✅ Fixed Bottom Button */
   #buttonBar {
-    padding: 15px;
-    border-top: 1px solid #ddd;
-    background: white;
-    text-align: center;
-  }
+  position: fixed;
+  bottom: 0;
+  left: 0;
 
-  button {
-    padding: 16px 45px;
-    font-size: 20px;
-    border: none;
-    border-radius: 14px;
-    background: black;
-    color: white;
-    cursor: pointer;
-    width: 90%;
-    max-width: 350px;
-  }
+  width: 100%;
+  background: white;
+  border-top: 1px solid #ddd;
+
+  padding: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+  #nextBtn {
+  width: 90%;
+  max-width: 400px;
+
+  padding: 18px;
+  font-size: 20px;
+
+  border: none;
+  border-radius: 14px;
+  background: black;
+  color: white;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+  
 
   /* ✅ Final Check Animation */
   .checkmark {
