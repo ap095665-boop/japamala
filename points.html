@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rosary Points</title>
+
+<style>
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100% !important;
+    overflow: auto !important;
+    font-family: Arial, sans-serif;
+    background: white;
+  }
+
+  .pointsApp {
+    height: 100vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  #todayMsg {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: green;
+  }
+
+  .pointsCircle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    animation: pop 0.8s ease;
+  }
+
+  .pointsCircle span {
+    font-size: 45px;
+    font-weight: bold;
+    color: white;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.5); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .progressWrap {
+    width: 90%;
+    max-width: 350px;
+    height: 16px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+
+  #progressBar {
+    height: 100%;
+    width: 0%;
+    background: green;
+    transition: width 1.5s ease;
+  }
+
+  #goalText {
+    font-size: 17px;
+    margin-top: 12px;
+  }
+
+  #giftBox {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: purple;
+    max-width: 90%;
+    animation: fadeIn 1s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="pointsApp">
+
+  <h1>⭐ Your Rosary Points</h1>
+
+  <div id="todayMsg"></div>
+
+  <!-- Animated Points Circle -->
+  <div class="pointsCircle">
+    <span id="pointsNumber">0</span>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progressWrap">
+    <div id="progressBar"></div>
+  </div>
+
+  <p id="goalText">Next Goal: 500 Points 🎁</p>
+
+  <!-- Gift Message -->
+  <div id="giftBox"></div>
+
+</div>
+
+<script>
+/* ✅ WHATSAPP NUMBER (CHANGE THIS) */
+const WHATSAPP_NUMBER = "91XXXXXXXXXX";  
+// Example: 919876543210
+
+/* ✅ Today Key */
+function getTodayKey() {
+  let d = new Date();
+  return d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+}
+
+/* ✅ Get Stored Points */
+function getPoints() {
+  return parseInt(localStorage.getItem("totalPoints") || "0");
+}
+
+/* ✅ Add +5 Only Once Per Day */
+function addPointsOnVisit() {
+
+  let today = getTodayKey();
+  let lastVisit = localStorage.getItem("lastPointsVisit");
+
+  if (lastVisit === today) {
+    return { added: false, total: getPoints() };
+  }
+
+  let updated = getPoints() + 5;
+  localStorage.setItem("totalPoints", updated);
+  localStorage.setItem("lastPointsVisit", today);
+
+  return { added: true, total: updated };
+}
+
+/* ✅ Animate Counter */
+function animatePoints(target) {
+  let num = 0;
+  let speed = target > 300 ? 5 : 15;
+
+  let interval = setInterval(() => {
+    num++;
+    document.getElementById("pointsNumber").innerText = num;
+    if (num >= target) clearInterval(interval);
+  }, speed);
+}
+
+/* ✅ RUN SYSTEM */
+let result = addPointsOnVisit();
+
+/* ✅ Daily Message */
+document.getElementById("todayMsg").innerText =
+  result.added
+    ? "✅ You received +5 points today!"
+    : "⚠️ Points already collected today.";
+
+/* ✅ Animate Total Points */
+animatePoints(result.total);
+
+/* ✅ Milestone Calculation (Every 500 Points Forever) */
+let milestone = Math.floor(result.total / 500) * 500;
+let nextGoal = milestone + 500;
+
+/* ✅ Update Goal Text */
+document.getElementById("goalText").innerText =
+  "Next Goal: " + nextGoal + " Points 🎁";
+
+/* ✅ Progress Bar */
+let percent = Math.min((result.total / nextGoal) * 100, 100);
+
+setTimeout(() => {
+  document.getElementById("progressBar").style.width = percent + "%";
+}, 300);
+
+/* ✅ Gift Message */
+document.getElementById("giftBox").innerHTML =
+  "Keep going! Next reward at " + nextGoal + " points 🎁";
+
+/* ✅ Redirect to WhatsApp at Each Milestone */
+if (milestone >= 500) {
+
+  let lastMilestone = localStorage.getItem("lastMilestoneReached") || "0";
+
+  if (milestone > parseInt(lastMilestone)) {
+
+    localStorage.setItem("lastMilestoneReached", milestone);
+
+    let msg =
+      "🎉 Rosary Milestone Completed!\n\n" +
+      "✅ Total Points: " + result.total + "\n" +
+      "🎁 Reward Level Reached: " + milestone + "\n\n" +
+      "A new surprise gift is unlocked!";
+
+    let waURL =
+      "https://wa.me/" + WHATSAPP_NUMBER +
+      "?text=" + encodeURIComponent(msg);
+
+    document.getElementById("giftBox").innerHTML =
+      "🎉 Surprise Gift Unlocked at " + milestone +
+      " Points! Redirecting to WhatsApp...";
+
+    setTimeout(() => {
+      window.location.href = waURL;
+    }, 2000);
+  }
+}
+</script>
+
+</body>
+</html>
