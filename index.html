@@ -253,7 +253,47 @@ document.getElementById("startBtn").addEventListener("click", () => {
       .then(() => console.log("Service Worker Registered ✅"))
       .catch((error) => console.log("SW Error ❌", error));
   }
-</script>
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
 
+window.addEventListener("beforeinstallprompt", (e) => {
+  // Stop auto prompt
+  e.preventDefault();
+
+  // Save event for later use
+  deferredPrompt = e;
+
+  // Show install button
+  installBtn.style.display = "block";
+});
+
+installBtn.addEventListener("click", async () => {
+  // Hide button after click
+  installBtn.style.display = "none";
+
+  // Show install popup
+  deferredPrompt.prompt();
+
+  // Wait for user action
+  const choiceResult = await deferredPrompt.userChoice;
+
+  if (choiceResult.outcome === "accepted") {
+    console.log("✅ User installed the app");
+  } else {
+    console.log("❌ User dismissed the install prompt");
+  }
+
+  // Reset prompt
+  deferredPrompt = null;
+});
+
+  window.addEventListener("appinstalled", () => {
+  alert("🎉 App Successfully Installed!");
+});
+  
+</script>
+<button id="installBtn" style="display:none;">
+  Install App
+</button>
 </body>
 </html>
