@@ -155,45 +155,12 @@
     color: lime;
     font-weight: bold;
   }
-.popup {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
 
-.popupBox {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  width: 300px;
-  text-align: center;
-}
-
-.popupBox button {
-  padding: 10px 15px;
-  margin: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
-}
-  
 </style>
 </head>
 
 <body>
-  <div id="installPopup" class="popup">
-  <div class="popupBox">
-    <h2>Install This App</h2>
-    <p>Get the best experience by installing our app.</p>
-
-    <button id="popupInstallBtn">Install Now</button>
-    <button id="popupCloseBtn">Later</button>
-  </div>
-</div>
+  
 
 <!-- ✅ Particles -->
 <div id="particles"></div>
@@ -292,44 +259,6 @@ document.getElementById("startBtn").addEventListener("click", () => {
 
 
   
-let deferredPrompt;
-
-const installPopup = document.getElementById("installPopup");
-const popupInstallBtn = document.getElementById("popupInstallBtn");
-const popupCloseBtn = document.getElementById("popupCloseBtn");
-
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-
-  // ✅ Show custom popup after 3 seconds
-  setTimeout(() => {
-    installPopup.style.display = "flex";
-  }, 3000);
-});
-
-popupInstallBtn.addEventListener("click", async () => {
-
-  // ✅ If Chrome prompt exists
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-
-    const result = await deferredPrompt.userChoice;
-    console.log("User choice:", result.outcome);
-
-    deferredPrompt = null;
-    installPopup.style.display = "none";
-
-  } else {
-
-    // ✅ Fallback instructions
-    alert("To install: Tap ⋮ Menu → Add to Home Screen");
-  }
-});
-
-popupCloseBtn.addEventListener("click", () => {
-  installPopup.style.display = "none";
-});
 
 </script>
 
