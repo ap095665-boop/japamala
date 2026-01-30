@@ -155,10 +155,45 @@
     color: lime;
     font-weight: bold;
   }
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popupBox {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  width: 300px;
+  text-align: center;
+}
+
+.popupBox button {
+  padding: 10px 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+}
+  
 </style>
 </head>
 
 <body>
+  <div id="installPopup" class="popup">
+  <div class="popupBox">
+    <h2>Install This App</h2>
+    <p>Get the best experience by installing our app.</p>
+
+    <button id="popupInstallBtn">Install Now</button>
+    <button id="popupCloseBtn">Later</button>
+  </div>
+</div>
 
 <!-- ✅ Particles -->
 <div id="particles"></div>
@@ -252,48 +287,51 @@ document.getElementById("startBtn").addEventListener("click", () => {
     navigator.serviceWorker.register("./service-worker.js")
       .then(() => console.log("Service Worker Registered ✅"))
       .catch((error) => console.log("SW Error ❌", error));
-  }
+  };
+
+
+
+  
 let deferredPrompt;
-const installBtn = document.getElementById("installBtn");
+
+const installPopup = document.getElementById("installPopup");
+const popupInstallBtn = document.getElementById("popupInstallBtn");
+const popupCloseBtn = document.getElementById("popupCloseBtn");
 
 window.addEventListener("beforeinstallprompt", (e) => {
-  // Stop auto prompt
   e.preventDefault();
-
-  // Save event for later use
   deferredPrompt = e;
 
-  // Show install button
-  installBtn.style.display = "block";
+  // ✅ Show custom popup after 3 seconds
+  setTimeout(() => {
+    installPopup.style.display = "flex";
+  }, 3000);
 });
 
-installBtn.addEventListener("click", async () => {
-  // Hide button after click
-  installBtn.style.display = "none";
+popupInstallBtn.addEventListener("click", async () => {
 
-  // Show install popup
-  deferredPrompt.prompt();
+  // ✅ If Chrome prompt exists
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
 
-  // Wait for user action
-  const choiceResult = await deferredPrompt.userChoice;
+    const result = await deferredPrompt.userChoice;
+    console.log("User choice:", result.outcome);
 
-  if (choiceResult.outcome === "accepted") {
-    console.log("✅ User installed the app");
+    deferredPrompt = null;
+    installPopup.style.display = "none";
+
   } else {
-    console.log("❌ User dismissed the install prompt");
+
+    // ✅ Fallback instructions
+    alert("To install: Tap ⋮ Menu → Add to Home Screen");
   }
-
-  // Reset prompt
-  deferredPrompt = null;
 });
 
-  window.addEventListener("appinstalled", () => {
-  alert("🎉 App Successfully Installed!");
+popupCloseBtn.addEventListener("click", () => {
+  installPopup.style.display = "none";
 });
-  
+
 </script>
-<button id="installBtn" style="display:none;">
-  Install App
-</button>
+
 </body>
 </html>
