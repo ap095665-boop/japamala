@@ -156,6 +156,66 @@
     font-weight: bold;
   }
 
+
+  .installPopup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.installBox {
+  background: white;
+  width: 85%;
+  max-width: 320px;
+  padding: 20px;
+  border-radius: 18px;
+  text-align: center;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.installBox h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.installBox p {
+  font-size: 14px;
+  margin: 10px 0 20px;
+  opacity: 0.8;
+}
+
+.btnRow {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+#installNowBtn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: black;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#closeBtn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #ccc;
+  color: black;
+  font-size: 15px;
+}
 </style>
 </head>
 
@@ -187,56 +247,19 @@
   <button id="startBtn">Start</button>
 
 </div>
-<div id="installPopup" style="
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.6);
-  z-index:9999;
-  justify-content:center;
-  align-items:center;
-">
+<div id="installPopup" class="installPopup">
+  <div class="installBox">
 
-  <div style="
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    text-align:center;
-    width:300px;
-  ">
+    <h2>Install Daily Rosary</h2>
+    <p>Get faster access from your home screen.</p>
 
-    <h2>Install App</h2>
-    <p>Install this app for best experience</p>
-
-    <button id="installNowBtn" style="
-      padding:10px 20px;
-      background:black;
-      color:white;
-      border:none;
-      border-radius:10px;
-      font-size:16px;
-    ">
-      Install Now
-    </button>
-
-    <br><br>
-
-    <button id="closeBtn" style="
-      padding:8px 15px;
-      border:none;
-      border-radius:10px;
-      background:gray;
-      color:white;
-    ">
-      Later
-    </button>
+    <div class="btnRow">
+      <button id="installNowBtn">Install</button>
+      <button id="closeBtn">Later</button>
+    </div>
 
   </div>
 </div>
-  
 
 
 <script>
