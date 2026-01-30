@@ -161,60 +161,69 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: yellow;
-  z-index: 9999;
-
+  background: rgba(0,0,0,0.6);
+  z-index: 999999;
   justify-content: center;
   align-items: center;
 }
 
-.installBox {
-  background: yellow;
-  width: 85%;
-  max-width: 320px;
-  padding: 25px 20px;
-  border-radius: 18px;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+/* ✅ RESET EVERYTHING INSIDE POPUP */
+.installPopup * {
+  all: unset;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* ✅ Heading */
+/* ✅ Popup Box */
+.installBox {
+  all: unset;
+  display: block;
+  width: 85%;
+  max-width: 320px;
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  text-align: center;
+}
+
+/* ✅ Title */
 .installBox h2 {
-  margin: 0;
-  font-size: 20px;
+  display: block;
+  font-size: 18px;
   font-weight: bold;
   color: black;
+  margin-bottom: 8px;
 }
 
 /* ✅ Description */
 .installBox p {
-  margin: 10px 0 20px;
+  display: block;
   font-size: 14px;
-  color: #444;
+  color: #333;
+  margin-bottom: 18px;
+}
+
+/* ✅ Buttons */
+.installBox button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 12px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
 /* ✅ Install Button */
 #installNowBtn {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  border: none;
-  border-radius: 12px;
   background: black;
   color: white;
-  font-size: 16px;
-  font-weight: bold;
 }
 
-/* ✅ Later Button (Text MUST be black) */
+/* ✅ Later Button */
 #closeBtn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
   background: #ddd;
-  color: black !important;
-  font-size: 15px;
+  color: black;
 }
 </style>
 </head>
