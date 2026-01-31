@@ -125,12 +125,96 @@ html, body {
     color: #ddd;
   }
   /* ✅ FULLSCREEN POINTS POPUP */
+/* ✅ Popup Full Screen */
+  #counterScreen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  /* ✅ Close Button Top Right */
+  #closeCounterBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    color: black;
+    cursor: pointer;
+  }
+
+  /* ✅ Big Touch Circle */
+  #bigCounterCircle {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 70px;
+    font-weight: bold;
+    color: black;
+
+    cursor: pointer;
+    user-select: none;
+
+    transition: 0.2s;
+  }
+
+  /* ✅ Tap Animation */
+  #bigCounterCircle:active {
+    transform: scale(0.94);
+  }
+
+  /* ✅ /10 Text */
+  #bigCounterCircle p {
+    font-size: 18px;
+    margin: 0;
+    opacity: 0.6;
+  }
+
+  /* ✅ Hint Text */
+  #tapHint {
+    margin-top: 25px;
+    font-size: 15px;
+    color: white;
+    opacity: 0.75;
+  }
+  
 </style>
 </head>
 
 <body>
 
+<!--✅ FULL SCREEN BEAD COUNTER POPUP -->
+<div id="counterScreen">
+
+  <!-- ✅ Close Button -->
+  <button id="closeCounterBtn">✖</button>
+
+  <!-- ✅ Big Touch Circle -->
+  <div id="bigCounterCircle">
+    <span id="bigCountText">0</span>
+    <p>/ 10</p>
+  </div>
+
+  <!-- ✅ Hint Text -->
+  <p id="tapHint">Tap the circle to count beads</p>
+
+</div>
 <!-- ✅ APP -->
 <div id="app">
   <div id="content"></div>
@@ -515,6 +599,72 @@ html, body {
   },5000);
 }
     
+        let count = 0;
+
+  const screen = document.getElementById("counterScreen");
+  const closeBtn = document.getElementById("closeCounterBtn");
+
+  const circle = document.getElementById("bigCounterCircle");
+  const countText = document.getElementById("bigCountText");
+
+  let startX = 0;
+  let endX = 0;
+
+  /* ✅ Swipe Detection */
+  document.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    let swipeDistance = endX - startX;
+
+    /* ✅ Swipe Right → Open */
+    if (swipeDistance > 100) {
+      screen.style.display = "flex";
+    }
+
+    /* ✅ Swipe Left → Close */
+    if (swipeDistance < -100) {
+      screen.style.display = "none";
+    }
+  });
+
+  /* ✅ Close Button */
+  closeBtn.addEventListener("click", () => {
+    screen.style.display = "none";
+  });
+
+  /* ✅ Tap Circle to Count */
+  circle.addEventListener("click", () => {
+
+    /* ✅ Vibration Tap Feedback */
+    if ("vibrate" in navigator) {
+      navigator.vibrate(55);
+    }
+
+    /* ✅ Increase Count */
+    count++;
+    countText.textContent = count;
+
+    /* ✅ Auto Close After 10 */
+    if (count === 10) {
+
+      /* ✅ Strong Completion Vibration */
+      navigator.vibrate([150, 70, 150]);
+
+      setTimeout(() => {
+
+        /* ✅ Close Popup */
+        screen.style.display = "none";
+
+        /* ✅ Reset Counter */
+        count = 0;
+        countText.textContent = count;
+
+      }, 700);
+    }
+  });
   
 
   /* ✅ Start */
