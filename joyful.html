@@ -127,31 +127,7 @@ html, body {
     color: #ddd;
   }
 /* ✅ FULLSCREEN POINTS POPUP */
-
-  /* ✅ Bigger Bottom Button */
-  #openCounterBtn {
-    position: fixed;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    padding: 18px 34px;      
-    font-size: 18px;         
-    font-weight: bold;
-
-    border: none;
-    border-radius: 40px;
-
-    background: black;
-    color: white;
-
-    z-index: 9999;
-    cursor: pointer;
-
-    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
-  }
-
-  /* ✅ Popup Full Screen */
+/* ✅ Popup Full Screen */
   #counterScreen {
     display: none;
     position: fixed;
@@ -200,7 +176,7 @@ html, body {
     transition: 0.2s;
   }
 
-  /* ✅ Tap Effect */
+  /* ✅ Tap Animation */
   #bigCounterCircle:active {
     transform: scale(0.94);
   }
@@ -219,26 +195,19 @@ html, body {
     color: white;
     opacity: 0.75;
   }
-
   
 </style>
 </head>
 
 <body>
 
-<!-- ✅ Bottom Button -->
-<button id="openCounterBtn">
-  📿 Bead Counter
-</button>
-
-
-<!-- ✅ Full Popup Counter Screen -->
+<!--✅ FULL SCREEN BEAD COUNTER POPUP -->
 <div id="counterScreen">
 
   <!-- ✅ Close Button -->
   <button id="closeCounterBtn">✖</button>
 
-  <!-- ✅ Big Circle Counter -->
+  <!-- ✅ Big Touch Circle -->
   <div id="bigCounterCircle">
     <span id="bigCountText">0</span>
     <p>/ 10</p>
@@ -248,7 +217,6 @@ html, body {
   <p id="tapHint">Tap the circle to count beads</p>
 
 </div>
-  
 <!-- ✅ APP -->
 <div id="app">
   <div id="content"></div>
@@ -644,27 +612,41 @@ html, body {
 }
       let count = 0;
 
-  const openBtn = document.getElementById("openCounterBtn");
   const screen = document.getElementById("counterScreen");
   const closeBtn = document.getElementById("closeCounterBtn");
 
   const circle = document.getElementById("bigCounterCircle");
   const countText = document.getElementById("bigCountText");
 
+  let startX = 0;
+  let endX = 0;
 
-  /* ✅ Open Counter Popup */
-  openBtn.addEventListener("click", () => {
-    screen.style.display = "flex";
+  /* ✅ Swipe Detection */
+  document.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
   });
 
+  document.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    let swipeDistance = endX - startX;
 
-  /* ✅ Close Popup Manually */
+    /* ✅ Swipe Right → Open */
+    if (swipeDistance > 100) {
+      screen.style.display = "flex";
+    }
+
+    /* ✅ Swipe Left → Close */
+    if (swipeDistance < -100) {
+      screen.style.display = "none";
+    }
+  });
+
+  /* ✅ Close Button */
   closeBtn.addEventListener("click", () => {
     screen.style.display = "none";
   });
 
-
-  /* ✅ Tap Circle to Count Beads */
+  /* ✅ Tap Circle to Count */
   circle.addEventListener("click", () => {
 
     /* ✅ Vibration Tap Feedback */
@@ -675,7 +657,6 @@ html, body {
     /* ✅ Increase Count */
     count++;
     countText.textContent = count;
-
 
     /* ✅ Auto Close After 10 */
     if (count === 10) {
@@ -694,7 +675,6 @@ html, body {
 
       }, 700);
     }
-
   });
   
 
